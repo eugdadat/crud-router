@@ -1,12 +1,14 @@
 import React, { useState } from "react";
-import { BrowserRouter as Router, Routers, Route, Navigate } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import "./App.css"
 
 // importação das páginas
 import Login from "./pages/Login/Login";
 
 // importação do NavBar (menu principal)
 import NavBar from "./components/NavBar/NavBar";
-
+import Cadastro from "./pages/Cadastro/Cadastro";
+import Lista from "./pages/Lista/Lista";
 import Home from "./pages/Home/Home";
 
 function App(){
@@ -32,7 +34,7 @@ function App(){
   return(
     <Router>
       {isAuthenticated && <NavBar onLogout={handleLogout}></NavBar>}
-      <Routers>
+      <Routes>
         <Route 
         path="/login" 
         element = {isAuthenticated ? <Navigate to="/"/> : <Login onLogin={handleLogin}/>}>
@@ -47,13 +49,13 @@ function App(){
         <Route
         path="/cadastro"
         element={
-          isAuthenticated ? (<Cadastro contacts={contacts} setContacts={contacts}/>) : (<Navigate to="/login"/>)}>
+          isAuthenticated ? (<Cadastro contacts={contacts} setContacts={setContacts}/>) : (<Navigate to="/login"/>)}>
         </Route>
 
         <Route
         path="/lista"
         element={
-          isAuthenticated ? (<Lista contacts={contacts} setContacts={contacts}/>) : (<Navigate to="/login"/>)}>
+          isAuthenticated ? (<Lista contacts={contacts} setContacts={setContacts}/>) : (<Navigate to="/login"/>)}>
         </Route>
 
         <Route
@@ -62,7 +64,7 @@ function App(){
           <Navigate to="/login"/>}>
         </Route>
 
-      </Routers>
+      </Routes>
     </Router>
   )
 }
